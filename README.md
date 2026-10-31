@@ -1,117 +1,117 @@
 # [FORGE] Daily Stoic Discipline
 
-> **[PROPRIETARY SOFTWARE — ALL RIGHTS RESERVED — STRICT NO-PLAGIARISM]**  
-> Ce logiciel, son architecture, ses concepts visuels, son moteur de citations et ses algorithmes météo sont la propriété exclusive de **Karlito Dev**. Toute copie, réutilisation de code, plagiat de concept ou extraction de données est formellement interdite.
+> **[PROPRIETARY SOFTWARE — ALL RIGHTS RESERVED — STRICT ANTI-PLAGIARISM NOTICE]**  
+> This software, including its architecture, visual presentation concepts, quote database engine, and atmospheric weather algorithms, is the exclusive proprietary intellectual property of **Karlito Dev**. Any copying, code reuse, concept plagiarism, unauthorized distribution, or data mining is strictly prohibited.
 
-Application native multiplateforme développée en **C# (.NET 9)** avec **Avalonia UI**, dédiée à la discipline stoïcienne quotidienne et à la trempe de la volonté.
-
----
-
-## [CAMEO: VISION] Philosophie & Rareté Absolue
-
-Forge n'est pas un flux infini. C'est un sanctuaire à **une seule pensée à la fois** : on ouvre l'application, on s'imprègne de la maxime, on glisse, on avance.
-
-### Principes Fondamentaux de la Forge :
-- **[DISCIPLINE] Une seule pensée à la fois** : Aucun défilement infini, pas de liste distraite.
-- **[RARITY] Rareté réelle** : Chaque pensée vue est consommée et ne revient jamais après fermeture.
-- **[ZERO-TRACKING] Confidentialité intégrale** : Zéro SDK publicitaire, zéro collecte d'identifiants d'appareil, zéro télémétrie.
-- **[ZERO-EMOJI] Épuration esthétique** : Zéro émoji dans toute l'interface afin de préserver la gravité, l'élégance et la sobriété stoïcienne.
-- **[INTEGRITY] Anonymat total des sources** : Aucune étiquette d'auteur ni provenance externe n'apparaît. La pensée se confronte directement à l'esprit sans intermédiaire.
+A cross-platform native application built with **C# (.NET 9)** and **Avalonia UI**, engineered as a daily sanctuary for stoic discipline and strength of will.
 
 ---
 
-## [CAMEO: DESIGN] Interface Glassmorphism & Atmosphères Animées
+## [CAMEO: VISION] Philosophy & Absolute Rarity
 
-L'interface tire parti des capacités de rendu graphique d'**Avalonia UI** :
+Forge is not a social feed or an endless scroll. It is a single-thought sanctuary: open the app, absorb the maxim, swipe, and return to reality.
 
-- **[GLASS] Finition Glassmorphism** : Cartes translucides frosted-glass avec bordures spéculaires douces, profondeur visuelle et contrastes minéraux (`#F5F1E8`, `#1E1D1A`, `#C89B53`).
-- **[WEATHER] Atmosphère Procédurale Animée** :
-  - **Pluie (`rain`)** : Traînées cinétiques fluides avec dérive au vent.
-  - **Neige (`snow`)** : Flocons légers oscillant harmoniquement sur la carte.
-  - **Soleil (`sunny`)** : Pulsation radiale douce de l'aura dorée.
-  - **Nuageux (`cloudy`)** : Nébuleuses brumeuses glissant à l'arrière-plan.
-- **[GESTURE] Navigation 100% Geste (Swipe Tactile)** :
-  - Glissement vers la droite (`→`) : Découverte de la prochaine pensée non vue.
-  - Glissement vers la gauche (`←`) : Retour sur les pensées vues pendant la session active.
-  - Translation interactive avec inclinaison angulaire (`RotateTransform`) et fondu d'opacité.
+### Core Principles:
+- **[DISCIPLINE] One thought at a time**: No infinite scrolling, no cluttered lists.
+- **[RARITY] Genuine scarcity**: Every viewed thought is consumed and will never appear again once the app is closed.
+- **[ZERO-TRACKING] Absolute privacy**: Zero advertising SDKs, zero hardware identifiers, zero analytics or telemetry.
+- **[ZERO-EMOJI] Visual sobriety**: Zero emojis across the entire interface to maintain stoic gravity, elegance, and focus.
+- **[INTEGRITY] Total source anonymity**: No author tags or historical attributions. The insight confronts the user's mind directly without mediation.
 
 ---
 
-## [CAMEO: CATALOG] Les 10 Catégories de Discipline
+## [CAMEO: DESIGN] Glassmorphism & Procedural Weather Atmospheres
 
-L'application intègre un jeu complet de 70 pensées par langue (210 pensées au total en Français, Anglais et Espagnol) réparties sur 10 voies :
+The interface leverages **Avalonia UI** custom procedural vector and canvas rendering:
 
-| Cameo | Catégorie | Thématique & Trempe |
+- **[GLASS] Glassmorphism Aesthetic**: Translucent frosted-glass cards with subtle specular borders, ambient depth, and mineral contrasts (`#F5F1E8`, `#1E1D1A`, `#C89B53`).
+- **[WEATHER] Procedural Animated Atmosphere**:
+  - **Rain (`rain`)**: Dynamic angled raindrops drifting with variable wind velocity.
+  - **Snow (`snow`)**: Soft snowflakes gently swaying along harmonic sinusoidal paths.
+  - **Sunny (`sunny`)**: Gentle breathing radial pulse of a warm solar aura.
+  - **Cloudy (`cloudy`)**: Low-opacity atmospheric mist drifting softly across the canvas.
+- **[GESTURE] 100% Gesture-Driven Navigation (Touch Swipe)**:
+  - Swipe Right (`→`): Forge the next unseen quote.
+  - Swipe Left (`←`): Revisit previously viewed quotes from the current active session.
+  - Interactive drag with dynamic angular tilt (`RotateTransform`) and opacity fading.
+
+---
+
+## [CAMEO: CATALOG] The 10 Discipline Categories
+
+Forge ships with a comprehensive seed of 70 quotes per language (210 quotes total across French, English, and Spanish) spanning 10 disciplines:
+
+| Cameo | Category | Focus & Character Forging |
 | :--- | :--- | :--- |
-| `[DISCIPLINE]` | **Discipline** | Rigueur quotidienne, persévérance inébranlable et maîtrise des pulsions. |
-| `[ACTION]` | **Action** | Passage à l'acte immédiat, refus viscéral de la procrastination. |
-| `[RESILIENCE]` | **Résilience** | Force de caractère face à l'adversité et absorption des épreuves. |
-| `[STOICISM]` | **Stoïcisme** | Aligné sur ce qui dépend de nous, détachement du reste. |
-| `[AMBITION]` | **Ambition** | Élévation exigeante, dépassement de l'homme qu'on était hier. |
-| `[LUCIDITY]` | **Lucidité** | Clarté de jugement, discernement tranchant pour dissoudre l'illusion. |
-| `[CALM]` | **Calme** | Sérénité souveraine au milieu du chaos et de la tourmente. |
-| `[DETACHMENT]` | **Détachement** | Lâcher-prise total sur les événements extérieurs et la fortune. |
-| `[PHILOSOPHY]` | **Philosophie** | Exercice pratique de vivre avec droiture et quête de vérité. |
-| `[POETIC]` | **Poétique** | Regard noble sur l'existence et intensité de chaque souffle. |
+| `[DISCIPLINE]` | **Discipline** | Daily rigor, unwavering perseverance, and mastery over impulse. |
+| `[ACTION]` | **Action** | Immediate decisive execution, refusing all forms of procrastination. |
+| `[RESILIENCE]` | **Resilience** | Inner fortitude through trial, absorbing adversity into strength. |
+| `[STOICISM]` | **Stoicism** | Relentless focus on what is within control, letting go of the rest. |
+| `[AMBITION]` | **Ambition** | High standards, demanding more of oneself than of anyone else. |
+| `[LUCIDITY]` | **Lucidity** | Mental clarity, cutting through illusion to see reality as it is. |
+| `[CALM]` | **Calm** | Unshakeable inner peace in the very center of tumult and chaos. |
+| `[DETACHMENT]` | **Detachment** | Complete release over external outcomes, opinion, and fortune. |
+| `[PHILOSOPHY]` | **Philosophy** | The daily practice of living with integrity and unbending virtue. |
+| `[POETIC]` | **Poetic** | Noble perspective on human existence and the brevity of time. |
 
 ---
 
-## [CAMEO: VIP] Déverrouillage VIP Personnel (« Karlito »)
+## [CAMEO: VIP] Personal VIP Key (« Karlito »)
 
-Un mécanisme de reconnaissance VIP direct est intégré au moteur :
-- **Activation** : Saisir **`Karlito`** comme nom d'utilisateur (insensible à la casse, ex. `karlito`).
-- **Effets immédiats** :
-  - Déblocage automatique à vie de la totalité des 10 catégories.
-  - Activation sans restriction des widgets d'écran d'accueil avec animations météo.
-  - Autorisation du partage filigrané haute fidélité.
-  - Affichage du badge exclusif `[VIP PREMIUM]` dans l'en-tête et l'onboarding.
+A direct VIP recognition mechanism is embedded in the identity engine:
+- **Activation**: Entering **`Karlito`** as the username (case-insensitive, e.g. `karlito`).
+- **Immediate Effects**:
+  - Automatically and permanently unlocks all 10 categories for life.
+  - Activates home-screen widgets with procedural weather effects.
+  - Enables high-resolution watermarked image exports.
+  - Displays the exclusive `[VIP PREMIUM]` emblem on headers and onboarding.
 
 ---
 
-## [CAMEO: ARCHITECTURE] Architecture C# & Avalonia UI
+## [CAMEO: ARCHITECTURE] Architecture Overview
 
 ```
 Forge/
-├── Forge.Core/                 [Logique Métier & MVVM]
+├── Forge.Core/                 [Domain Logic & MVVM]
 │   ├── Models/                 QuoteModel, QuoteCategory
 │   ├── ViewModels/             MainViewModel, OnboardingViewModel, ViewModelBase
 │   └── Repositories/           IQuoteRepository, IUserRepository, IBillingService, IWeatherService
-├── Forge.Data/                 [Persistance & Base Locale]
+├── Forge.Data/                 [Persistence & Local Storage]
 │   ├── Local/                  ForgeDbContext (SQLite async), InitialQuotesSeed (210 quotes)
-│   ├── Preferences/            PreferencesService (Stockage chiffré & Cheatcode Karlito)
-│   └── RemoteQuoteSource/      IRemoteQuoteSyncService (Stub V1 pour sync V2)
-├── Forge.UI/                   [Couche Graphique & XAML]
-│   ├── Controls/               WeatherAtmosphereControl (Moteur météo particulaire)
-│   ├── Views/                  MainView (Swipe drag), OnboardingView (Tutoriel gestuel)
-│   ├── Styles/                 ForgeTheme.axaml (Tokens Glassmorphism)
-│   └── Assets/                 Covers officiels & Logos vectorisés
-└── Forge.Android/              [Tête de Plateforme Mobile]
-    ├── MainActivity.cs         FLAG_SECURE, Injection des services
-    ├── AndroidManifest.xml     Permissions, Sécurité
+│   ├── Preferences/            PreferencesService (Encrypted key-value & VIP bypass)
+│   └── RemoteQuoteSource/      IRemoteQuoteSyncService (V1 signature stub ready for V2)
+├── Forge.UI/                   [XAML Presentation & Controls]
+│   ├── Controls/               WeatherAtmosphereControl (Procedural particle canvas)
+│   ├── Views/                  MainView (Interactive swipe drag), OnboardingView (Gesture guide)
+│   ├── Styles/                 ForgeTheme.axaml (Glassmorphism design tokens)
+│   └── Assets/                 Official high-resolution category covers & logos
+└── Forge.Android/              [Mobile Platform Head]
+    ├── MainActivity.cs         Hardware FLAG_SECURE, Service container composition
+    ├── AndroidManifest.xml     Permissions and security attributes
     └── Services/               AndroidBillingService (Google Play Billing v7.1.0)
 ```
 
 ---
 
-## [CAMEO: SECURITY] Protection des Données & Anti-Copie
+## [CAMEO: SECURITY] Content Protection & Anti-Theft
 
-- **[FLAG_SECURE] Anti-Capture** : Protection matérielle activée sur la fenêtre Android bloquant toute capture d'écran et tout enregistrement vidéo.
-- **[WATERMARK] Partage Filigrané** : Aucun texte brut copiable. Le partage Premium produit un visuel avec micro-sceau d'authentification IA transparent à 8% (`FORGE · SHA256`).
-- **[STORE] Monétisation Google Play** : Achat unique à vie configuré à **3,99 $ USD** (`forge_premium_lifetime`).
-
----
-
-## [CAMEO: CI-CD] Compilation Automatisée GitHub Actions
-
-Le workflow automatisé [`.github/workflows/avalonia-build.yml`](.github/workflows/avalonia-build.yml) se déclenche à chaque push sur la branche `avalonia` :
-- Restauration des dépendances .NET 9 et du workload Android.
-- Compilation Release de `Forge.Core`, `Forge.UI` et `Forge.Android`.
-- Génération et archivage automatique de l'APK installable sans consommer les ressources de la machine locale.
+- **[FLAG_SECURE] Hardware Anti-Capture**: Enforced at Android window level to block screenshots and screen recordings across all devices.
+- **[WATERMARK] Secure Image Sharing**: No plain text is copied. Premium shares produce a curated image with an embedded 8% opacity cryptographic AI verification seal (`FORGE · SHA256`).
+- **[STORE] Google Play Billing**: Lifetime one-time purchase configured at **$3.99 USD** (`forge_premium_lifetime`) with dynamic multi-currency store lookup.
 
 ---
 
-## [CAMEO: LICENSE] Licence Propriétaire & Anti-Plagiat
+## [CAMEO: CI-CD] Automated Cloud Compilation
 
-Ce logiciel est sous licence propriétaire exclusive de **Karlito Dev** (voir [LICENSE](LICENSE)) :
-- **Interdiction formelle de plagiat, clonage ou réplication** du concept, du design, des citations et de l'architecture.
-- **Tous droits réservés (All Rights Reserved)** — Karlito Dev.
+The GitHub Actions workflow [`.github/workflows/avalonia-build.yml`](.github/workflows/avalonia-build.yml) triggers on every push to the `avalonia` branch:
+- Restores .NET 9 SDK and installs the Android workload.
+- Builds `Forge.Core`, `Forge.UI`, and packages `Forge.Android`.
+- Produces and archives the installable APK without consuming local developer machine RAM.
+
+---
+
+## [CAMEO: LICENSE] Proprietary License & Anti-Plagiarism
+
+This software is strictly proprietary and owned by **Karlito Dev** (see [LICENSE](LICENSE)):
+- **Plagiarism and unauthorized replication strictly prohibited**.
+- **All Rights Reserved** — Karlito Dev.
