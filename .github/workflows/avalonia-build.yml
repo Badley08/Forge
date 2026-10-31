@@ -10,11 +10,17 @@ on:
 jobs:
   build:
     name: Build Avalonia Android
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
@@ -27,8 +33,11 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore Forge.sln
 
-      - name: Build Core & UI
-        run: dotnet build Forge.Core/Forge.Core.csproj -c Release && dotnet build Forge.UI/Forge.UI.csproj -c Release
+      - name: Build Core, Data & UI
+        run: |
+          dotnet build Forge.Core/Forge.Core.csproj -c Release
+          dotnet build Forge.Data/Forge.Data.csproj -c Release
+          dotnet build Forge.UI/Forge.UI.csproj -c Release
 
       - name: Build Android Package
         run: dotnet build Forge.Android/Forge.Android.csproj -c Release -f net9.0-android -p:AndroidPackageFormat=apk

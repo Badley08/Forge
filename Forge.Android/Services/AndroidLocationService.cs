@@ -103,7 +103,9 @@ public class AndroidLocationService : ILocationService
                 {
                     try
                     {
+#pragma warning disable CA1422
                         locationManager.RequestSingleUpdate(provider, listener, Looper.MainLooper);
+#pragma warning restore CA1422
                     }
                     catch
                     {
