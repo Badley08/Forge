@@ -192,7 +192,9 @@ public static class InitialQuotesSeed
         quotes.Add(new() { Text = "A single spark is enough to light the dark; a single resolute choice is enough to redeem a destiny.", Lang = "EN", Day = 4, Category = "poetic", WeatherHint = "rain" });
         quotes.Add(new() { Text = "The gale carries away dead leaves, but honors the unyielding boughs.", Lang = "EN", Day = 5, Category = "poetic", WeatherHint = "snow" });
         quotes.Add(new() { Text = "Walk with a steady tread upon the scorching ground; the earth bends to the gravity of resolute men.", Lang = "EN", Day = 6, Category = "poetic", WeatherHint = "any" });
-        quotes.Add(new() { Text = "At         // ==========================================
+        quotes.Add(new() { Text = "At the end of toil lies no fleeting applause, but the quiet pride of having stood without wavering.", Lang = "EN", Day = 7, Category = "poetic", WeatherHint = "any" });
+
+        // ==========================================
         // Spanish (ES) - 10 Categories x 7 Days = 70 Quotes
         // ==========================================
 

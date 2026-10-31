@@ -37,7 +37,6 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         if (requestCode == AndroidLocationService.LocationPermissionRequestCode)
         {
-            // Coarse location granted: trigger live atmospheric weather query
             if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
             {
                 if (App.Current is App forgeApp && forgeApp.Services != null)

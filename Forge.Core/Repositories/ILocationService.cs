@@ -1,8 +1,9 @@
 namespace Forge.Core.Repositories;
 
 /// <summary>
-/// Abstraction for coarse location access and user permission workflows.
-/// Designed specifically for approximate weather atmospheric queries without device tracking.
+/// Abstraction for coarse/fine location access and user permission workflows.
+/// Designed specifically for approximate weather atmospheric queries for widgets and quote cards.
+/// Complies with Google Play prominent disclosure and privacy guidelines.
 /// </summary>
 public interface ILocationService
 {

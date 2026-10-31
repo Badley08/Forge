@@ -16,17 +16,30 @@ public partial class MainView : UserControl
     private Point _pointerStart;
     private const double SwipeThreshold = 75.0;
 
+    private TranslateTransform? _translate;
+    private RotateTransform? _rotate;
+    private Border? _cardContainer;
+
     public MainView()
     {
         InitializeComponent();
 
-        var container = this.FindControl<Border>("QuoteCardContainer");
-        if (container != null)
+        _cardContainer = this.FindControl<Border>("QuoteCardContainer");
+        if (_cardContainer != null)
         {
-            container.PointerPressed += OnCardPointerPressed;
-            container.PointerMoved += OnCardPointerMoved;
-            container.PointerReleased += OnCardPointerReleased;
-            container.PointerCaptureLost += OnCardPointerCaptureLost;
+            _cardContainer.PointerPressed += OnCardPointerPressed;
+            _cardContainer.PointerMoved += OnCardPointerMoved;
+            _cardContainer.PointerReleased += OnCardPointerReleased;
+            _cardContainer.PointerCaptureLost += OnCardPointerCaptureLost;
+
+            if (_cardContainer.RenderTransform is TransformGroup group)
+            {
+                foreach (var transform in group.Children)
+                {
+                    if (transform is TranslateTransform tt) _translate = tt;
+                    else if (transform is RotateTransform rt) _rotate = rt;
+                }
+            }
         }
     }
 
@@ -47,15 +60,11 @@ public partial class MainView : UserControl
         var current = e.GetPosition(this);
         var deltaX = current.X - _pointerStart.X;
 
-        var translate = this.FindControl<TranslateTransform>("CardTranslate");
-        var rotate = this.FindControl<RotateTransform>("CardRotate");
-        var card = this.FindControl<Border>("QuoteCardContainer");
-
-        if (translate != null) translate.X = deltaX;
-        if (rotate != null) rotate.Angle = deltaX * 0.035;
-        if (card != null)
+        if (_translate != null) _translate.X = deltaX;
+        if (_rotate != null) _rotate.Angle = deltaX * 0.035;
+        if (_cardContainer != null)
         {
-            card.Opacity = Math.Clamp(1.0 - Math.Abs(deltaX) / 600.0, 0.45, 1.0);
+            _cardContainer.Opacity = Math.Clamp(1.0 - Math.Abs(deltaX) / 600.0, 0.45, 1.0);
         }
     }
 
@@ -93,12 +102,8 @@ public partial class MainView : UserControl
 
     private void ResetCardTransform()
     {
-        var translate = this.FindControl<TranslateTransform>("CardTranslate");
-        var rotate = this.FindControl<RotateTransform>("CardRotate");
-        var card = this.FindControl<Border>("QuoteCardContainer");
-
-        if (translate != null) translate.X = 0;
-        if (rotate != null) rotate.Angle = 0;
-        if (card != null) card.Opacity = 1.0;
+        if (_translate != null) _translate.X = 0;
+        if (_rotate != null) _rotate.Angle = 0;
+        if (_cardContainer != null) _cardContainer.Opacity = 1.0;
     }
 }

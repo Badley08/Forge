@@ -66,6 +66,11 @@ public partial class OnboardingViewModel : ViewModelBase
         UpdateLocalizedLocationDisclosure();
     }
 
+    public OnboardingViewModel(IUserRepository userRepository, Action onCompleted)
+        : this(userRepository, null, onCompleted)
+    {
+    }
+
     private void DetectSystemLanguage()
     {
         try
@@ -96,24 +101,24 @@ public partial class OnboardingViewModel : ViewModelBase
             case "FR":
                 LocationTitle = "Permission de Localisation & Météo";
                 LocationPurpose = "Forge utilise votre position approximative (ville/région) exclusivement pour déterminer les conditions météo locales en temps réel (pluie, neige, soleil, nuages) afin d'harmoniser les pensées stoïciennes et animer les widgets d'écran d'accueil.";
-                LocationPrivacyNotice = "Confidentialité absolue : Vos coordonnées approximatives ne sont jamais stockées, jamais partagées et ne font l'objet d'aucun traçage. Si vous refusez, Forge fonctionne normalement avec la sélection par jour.";
-                LocationAcceptButtonText = "ACTIVER LA MÉTÉO LOCALE";
+                LocationPrivacyNotice = "Confidentialité absolue : Vos coordonnées ne sont jamais stockées, jamais partagées et ne font l'objet d'aucun traçage. Si vous refusez, Forge fonctionne normalement avec la sélection par jour.";
+                LocationAcceptButtonText = "ACTIVER LA MÉTÉO DES WIDGETS";
                 LocationDeclineButtonText = "Continuer sans météo";
                 break;
 
             case "ES":
                 LocationTitle = "Permiso de Ubicación & Clima";
-                LocationPurpose = "Forge utiliza su ubicación aproximada exclusivamente para determinar las condiciones meteorológicas locales en tiempo real (lluvia, nieve, sol, nubes) y armonizar las citas estoicas y los widgets de pantalla de inicio.";
-                LocationPrivacyNotice = "Privacidad total: Sus coordenadas aproximadas nunca se almacenan, nunca se comparten y no son objeto de ningún rastreo. Si rechaza, Forge funciona normalmente según el día de la semana.";
-                LocationAcceptButtonText = "ACTIVAR CLIMA LOCAL";
+                LocationPurpose = "Forge utiliza su ubicación exclusivamente para determinar las condiciones meteorológicas locales en tiempo real (lluvia, nieve, sol, nubes) y armonizar las citas estoicas y los widgets de pantalla de inicio.";
+                LocationPrivacyNotice = "Privacidad total: Sus coordenadas nunca se almacenan, nunca se comparten y no son objeto de ningún rastreo. Si rechaza, Forge funciona normalmente según el día de la semana.";
+                LocationAcceptButtonText = "ACTIVAR CLIMA DE WIDGETS";
                 LocationDeclineButtonText = "Continuar sin clima";
                 break;
 
             default:
                 LocationTitle = "Location Permission & Weather";
-                LocationPurpose = "Forge accesses your coarse approximate location solely to determine live local atmospheric conditions (rain, snow, sun, clouds) to harmonize stoic quotes and animate home-screen widgets with your daily environment.";
+                LocationPurpose = "Forge accesses your coarse location solely to determine live local atmospheric conditions (rain, snow, sun, clouds) to harmonize stoic quotes and animate home-screen widgets with your daily environment.";
                 LocationPrivacyNotice = "Absolute Privacy: Your coordinates are never stored, never shared, and never tracked. If declined, Forge operates seamlessly using day-of-the-week progression.";
-                LocationAcceptButtonText = "ENABLE LOCAL WEATHER";
+                LocationAcceptButtonText = "ENABLE WIDGET WEATHER";
                 LocationDeclineButtonText = "Continue without weather";
                 break;
         }

@@ -11,6 +11,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <EnableProguard>true</EnableProguard>
+    <AndroidEnableProguardMappingFile>true</AndroidEnableProguardMappingFile>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <ProguardConfiguration Include="proguard-rules.pro" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.2.1" />
     <PackageReference Include="Plugin.InAppBilling" Version="7.1.0" />

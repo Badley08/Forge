@@ -226,7 +226,8 @@ public class WeatherAtmosphereControl : Control
         {
             Center = new RelativePoint(0.85, 0.2, RelativeUnit.Relative),
             GradientOrigin = new RelativePoint(0.85, 0.2, RelativeUnit.Relative),
-            Radius = 0.6,
+            RadiusX = new RelativeScalar(0.6, RelativeUnit.Relative),
+            RadiusY = new RelativeScalar(0.6, RelativeUnit.Relative),
             GradientStops = new GradientStops
             {
                 new GradientStop(Color.FromArgb(90, 245, 195, 80), 0.0),

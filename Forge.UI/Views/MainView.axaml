@@ -77,8 +77,8 @@
                 <Border x:Name="QuoteCardContainer" Classes="forge-glass" Padding="22" ClipToBounds="True">
                     <Border.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform x:Name="CardTranslate" X="0" Y="0" />
-                            <RotateTransform x:Name="CardRotate" Angle="0" />
+                            <TranslateTransform X="0" Y="0" />
+                            <RotateTransform Angle="0" />
                         </TransformGroup>
                     </Border.RenderTransform>
 

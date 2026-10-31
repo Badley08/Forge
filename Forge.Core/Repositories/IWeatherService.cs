@@ -10,17 +10,17 @@ public interface IWeatherService
 
 /// <summary>
 /// Fetches real-time atmospheric conditions using Open-Meteo / WMO standard weather codes
-/// based on coarse approximate coordinates. Preserves zero user tracking and falls back
+/// based on coarse/fine coordinates. Preserves zero user tracking and falls back
 /// gracefully to time-of-day heuristics if location permission is declined or offline.
 /// </summary>
 public class WeatherService : IWeatherService
 {
-    private readonly ILocationService _locationService;
+    private readonly ILocationService? _locationService;
     private readonly HttpClient _httpClient;
     private string _cachedHint = "any";
     private DateTime _lastFetchTime = DateTime.MinValue;
 
-    public WeatherService(ILocationService locationService)
+    public WeatherService(ILocationService? locationService = null)
     {
         _locationService = locationService;
         _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
@@ -36,18 +36,21 @@ public class WeatherService : IWeatherService
 
         try
         {
-            var coords = await _locationService.GetApproximateLocationAsync();
-            if (coords.HasValue)
+            if (_locationService != null)
             {
-                var (lat, lon) = coords.Value;
-                var url = $"https://api.open-meteo.com/v1/forecast?latitude={lat:F2}&longitude={lon:F2}&current=weather_code";
-
-                var response = await _httpClient.GetFromJsonAsync<WeatherApiResponse>(url);
-                if (response?.Current != null)
+                var coords = await _locationService.GetApproximateLocationAsync();
+                if (coords.HasValue)
                 {
-                    _cachedHint = MapWeatherCodeToHint(response.Current.WeatherCode);
-                    _lastFetchTime = DateTime.UtcNow;
-                    return _cachedHint;
+                    var (lat, lon) = coords.Value;
+                    var url = $"https://api.open-meteo.com/v1/forecast?latitude={lat:F2}&longitude={lon:F2}&current=weather_code";
+
+                    var response = await _httpClient.GetFromJsonAsync<WeatherApiResponse>(url);
+                    if (response?.Current != null)
+                    {
+                        _cachedHint = MapWeatherCodeToHint(response.Current.WeatherCode);
+                        _lastFetchTime = DateTime.UtcNow;
+                        return _cachedHint;
+                    }
                 }
             }
         }
@@ -90,9 +93,9 @@ public class WeatherService : IWeatherService
         return hour switch
         {
             >= 6 and < 12 => "sunny",
-            >= 12 and < 18 => "cloudy",
-            >= 18 and < 22 => "rain",
-            _ => "any"
+            >= 12 and < 17 => "cloudy",
+            >= 17 and < 21 => "rain",
+            _ => "snow"
         };
     }
 
