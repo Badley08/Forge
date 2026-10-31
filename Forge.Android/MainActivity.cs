@@ -31,6 +31,24 @@ public class MainActivity : AvaloniaMainActivity<App>
         base.OnCreate(savedInstanceState);
     }
 
+    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+    {
+        base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == AndroidLocationService.LocationPermissionRequestCode)
+        {
+            // Coarse location granted: trigger live atmospheric weather query
+            if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+            {
+                if (App.Current is App forgeApp && forgeApp.Services != null)
+                {
+                    var mainVm = forgeApp.Services.GetService<MainViewModel>();
+                    mainVm?.LoadInitialQuoteAsync();
+                }
+            }
+        }
+    }
+
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         var services = ConfigureServices();
@@ -59,6 +77,7 @@ public class MainActivity : AvaloniaMainActivity<App>
         services.AddSingleton<IQuoteRepository, QuoteRepository>();
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<IBillingService, AndroidBillingService>();
+        services.AddSingleton<ILocationService>(new AndroidLocationService(this));
         services.AddSingleton<IWeatherService, WeatherService>();
 
         services.AddTransient<MainViewModel>();

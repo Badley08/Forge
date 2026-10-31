@@ -22,9 +22,10 @@ public partial class App : Application
         if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             var userRepo = Services?.GetRequiredService<IUserRepository>();
+            var locationService = Services?.GetService<ILocationService>();
             if (userRepo != null && !userRepo.IsOnboardingCompleted)
             {
-                var onboardingVm = new OnboardingViewModel(userRepo, () =>
+                var onboardingVm = new OnboardingViewModel(userRepo, locationService, () =>
                 {
                     singleViewPlatform.MainView = new MainView
                     {

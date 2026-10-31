@@ -50,7 +50,35 @@
                 </StackPanel>
             </Border>
 
-            <!-- Step 2: Username Input & Karlito VIP Recognition -->
+            <!-- Step 2: Google Play Prominent Location Disclosure (EN / FR / ES) -->
+            <Border Classes="forge-glass" Padding="28"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.LocationDisclosure}}">
+                <StackPanel Spacing="18" HorizontalAlignment="Center">
+                    <Border Background="{StaticResource ForgeIronBrush}" CornerRadius="20" Padding="16,6" HorizontalAlignment="Center">
+                        <TextBlock Text="CONFORMITÉ GOOGLE PLAY" FontSize="11" FontWeight="Bold" LetterSpacing="2" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                    </Border>
+
+                    <TextBlock Text="{Binding LocationTitle}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" />
+
+                    <!-- Detailed purpose card explaining weather sync -->
+                    <Border Background="#15000000" CornerRadius="12" Padding="16" Width="330">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="{Binding LocationPurpose}" FontSize="12.5" TextWrapping="Wrap" LineHeight="19" />
+                            <Separator Height="1" Background="{StaticResource ForgeBorderBrush}" />
+                            <TextBlock Text="{Binding LocationPrivacyNotice}" FontSize="11" TextWrapping="Wrap" Foreground="{StaticResource ForgeMutedBrush}" LineHeight="17" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- User consent buttons -->
+                    <Button Content="{Binding LocationAcceptButtonText}" Classes="forge-button"
+                            Command="{Binding AcceptLocationCommand}" Width="330" HorizontalAlignment="Center" Margin="0,6,0,0" />
+                    <Button Content="{Binding LocationDeclineButtonText}"
+                            Command="{Binding DeclineLocationCommand}" Width="330" HorizontalAlignment="Center"
+                            Background="Transparent" Foreground="{StaticResource ForgeMutedBrush}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 3: Username Input & Karlito VIP Recognition -->
             <Border Classes="forge-glass" Padding="28"
                     IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Name}}">
                 <StackPanel Spacing="18" HorizontalAlignment="Center">
@@ -63,7 +91,7 @@
                     <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="Ton nom ou surnom"
                              Width="300" Padding="14,12" FontSize="16" HorizontalAlignment="Center" CornerRadius="8" />
 
-                    <!-- Real-time VIP Karlito Activation Banner -->
+                    <!-- Real-time VIP Activation Banner (when Karlito is typed) -->
                     <Border Classes="forge-glass-dark" Padding="14" CornerRadius="10" Width="300"
                             IsVisible="{Binding IsKarlitoVip}" HorizontalAlignment="Center">
                         <StackPanel Spacing="6">
@@ -79,7 +107,7 @@
                 </StackPanel>
             </Border>
 
-            <!-- Step 3: Swipe Gesture Interactive Tutorial -->
+            <!-- Step 4: Swipe Gesture Interactive Tutorial -->
             <Border Classes="forge-glass" Padding="28"
                     IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.SwipeTutorial}}">
                 <StackPanel Spacing="18" HorizontalAlignment="Center">
@@ -131,7 +159,7 @@
                 </StackPanel>
             </Border>
 
-            <!-- Step 4: Final Welcome Step -->
+            <!-- Step 5: Final Welcome Step -->
             <Border Classes="forge-glass" Padding="28"
                     IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Welcome}}">
                 <StackPanel Spacing="20" HorizontalAlignment="Center">
