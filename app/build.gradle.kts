@@ -62,7 +62,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     // Play Billing v6
-    implementation(libs.play-billing-ktx)
+    implementation(libs.play.billing.ktx)
 
     // DataStore Preferences
     implementation(libs.androidx.datastore.preferences)

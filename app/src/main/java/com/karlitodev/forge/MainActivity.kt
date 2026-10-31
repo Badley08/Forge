@@ -9,10 +9,11 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.karlitodev.forge.ui.main.MainScreen
 import com.karlitodev.forge.ui.main.MainViewModel
@@ -21,6 +22,13 @@ import com.karlitodev.forge.ui.onboarding.OnboardingScreen
 import com.karlitodev.forge.ui.onboarding.OnboardingViewModel
 import com.karlitodev.forge.ui.theme.ForgeBackground
 import com.karlitodev.forge.ui.theme.ForgeTheme
+
+@Suppress("UNCHECKED_CAST")
+class AppViewModelFactory<T : ViewModel>(private val creator: () -> T) : ViewModelProvider.Factory {
+    override fun <VM : ViewModel> create(modelClass: Class<VM>): VM {
+        return creator() as VM
+    }
+}
 
 class MainActivity : ComponentActivity() {
 
@@ -55,9 +63,9 @@ class MainActivity : ComponentActivity() {
                     ) { screen ->
                         when (screen) {
                             Screen.Onboarding -> {
-                                val onboardingViewModel = viewModel<OnboardingViewModel> {
-                                    OnboardingViewModel(repository)
-                                }
+                                val onboardingViewModel = viewModel<OnboardingViewModel>(
+                                    factory = AppViewModelFactory { OnboardingViewModel(repository) }
+                                )
                                 OnboardingScreen(
                                     viewModel = onboardingViewModel,
                                     onOnboardingFinished = {
@@ -66,9 +74,9 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             Screen.Main -> {
-                                val mainViewModel = viewModel<MainViewModel> {
-                                    MainViewModel(repository)
-                                }
+                                val mainViewModel = viewModel<MainViewModel>(
+                                    factory = AppViewModelFactory { MainViewModel(repository) }
+                                )
                                 MainScreen(viewModel = mainViewModel)
                             }
                         }
