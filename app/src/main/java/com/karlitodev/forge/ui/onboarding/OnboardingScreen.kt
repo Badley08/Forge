@@ -4,9 +4,12 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.res.painterResource
+import com.karlitodev.forge.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -100,6 +103,16 @@ private fun StepName(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.forge_light),
+            contentDescription = "Logo Forge",
+            modifier = Modifier
+                .size(64.dp)
+                .clip(RoundedCornerShape(14.dp))
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = "FORGE",
             style = MaterialTheme.typography.headlineLarge,

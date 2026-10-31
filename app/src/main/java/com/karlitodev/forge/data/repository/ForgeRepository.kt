@@ -23,6 +23,17 @@ class ForgeRepository(
     val userIdFlow: Flow<String> = preferencesRepository.userIdFlow
 
     /**
+     * Cheat code VIP : Si le nom de l'utilisateur est "Karlito",
+     * le mode Premium est automatiquement débloqué à vie sans passer par Billing.
+     */
+    val isPremiumFlow: Flow<Boolean> = kotlinx.coroutines.flow.combine(
+        billingManager.isPremium,
+        preferencesRepository.userNameFlow
+    ) { playBillingPremium, name ->
+        playBillingPremium || name.trim().equals("Karlito", ignoreCase = true)
+    }
+
+    /**
      * Ensures initial 21 quotes exist in Room without loading them all into memory during app use.
      */
     suspend fun ensureQuotesInitialized() {

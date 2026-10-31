@@ -27,7 +27,8 @@ class MainViewModel(
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    val isPremium: StateFlow<Boolean> = repository.billingManager.isPremium
+    val isPremium: StateFlow<Boolean> = repository.isPremiumFlow
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     val userName: StateFlow<String> = repository.userNameFlow
         .stateIn(viewModelScope, SharingStarted.Lazily, "")

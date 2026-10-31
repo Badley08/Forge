@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -36,11 +37,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.karlitodev.forge.R
 import com.karlitodev.forge.data.local.QuoteEntity
 import com.karlitodev.forge.ui.theme.ForgeBackground
 import com.karlitodev.forge.ui.theme.ForgeBorder
@@ -81,11 +86,19 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // En-tête supérieur
+            // En-tête supérieur avec Logo officiel Forge
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.forge_light),
+                    contentDescription = "Logo Forge",
+                    modifier = Modifier
+                        .size(52.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                )
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "FORGE",
                     style = MaterialTheme.typography.labelLarge,
@@ -94,7 +107,7 @@ fun MainScreen(
                     letterSpacing = 4.sp
                 )
                 if (userName.isNotBlank()) {
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "Discipline de $userName",
                         style = MaterialTheme.typography.bodyMedium,
@@ -236,14 +249,39 @@ private fun QuoteCard(
     quote: QuoteEntity,
     modifier: Modifier = Modifier
 ) {
+    val coverRes = when (quote.day % 10) {
+        1 -> R.drawable.cover_discipline
+        2 -> R.drawable.cover_action
+        3 -> R.drawable.cover_resilience
+        4 -> R.drawable.cover_stoicism
+        5 -> R.drawable.cover_ambition
+        6 -> R.drawable.cover_lucidity
+        7 -> R.drawable.cover_calm
+        8 -> R.drawable.cover_detachment
+        9 -> R.drawable.cover_philosophic
+        else -> R.drawable.cover_poetic
+    }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
             .border(1.dp, ForgeBorder, RoundedCornerShape(16.dp))
             .background(ForgeCardBackground)
-            .padding(28.dp),
+            .padding(22.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = painterResource(id = coverRes),
+            contentDescription = "Thème de la citation",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(130.dp)
+                .clip(RoundedCornerShape(12.dp))
+        )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
         Text(
             text = "JOUR ${quote.day}",
             style = MaterialTheme.typography.labelLarge,
@@ -252,7 +290,7 @@ private fun QuoteCard(
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = "« ${quote.text} »",
@@ -262,7 +300,7 @@ private fun QuoteCard(
             lineHeight = 34.sp
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "FORGE · DISCIPLINE",
