@@ -5,44 +5,157 @@
              x:DataType="vm:OnboardingViewModel"
              Background="{StaticResource ForgeBackgroundBrush}">
 
-    <Grid Margin="24">
-        <!-- Étape 1 : Nom -->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20"
-                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Name}}">
-            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="72" Height="72" HorizontalAlignment="Center" />
-            <TextBlock Text="FORGE" FontSize="26" FontWeight="Bold" LetterSpacing="4" HorizontalAlignment="Center" />
-            <TextBlock Text="Comment on t'appelle ?" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" />
-            <TextBlock Text="L'esprit forgé exige un nom pour sceller sa discipline." Foreground="{StaticResource ForgeMutedBrush}" HorizontalAlignment="Center" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24" MinHeight="600" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="440">
 
-            <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="Ton nom ou surnom" Width="280" HorizontalAlignment="Center" />
-
-            <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="280" HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <!-- Étape 2 : Langue -->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16"
+            <!-- Step 1: Language Selection -->
+            <Border Classes="forge-glass" Padding="28"
                     IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Language}}">
-            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="72" Height="72" HorizontalAlignment="Center" />
-            <TextBlock Text="LANGUE" FontSize="24" FontWeight="Bold" LetterSpacing="3" HorizontalAlignment="Center" />
-            <TextBlock Text="Dans quelle langue forger ton esprit ?" FontSize="18" HorizontalAlignment="Center" />
+                <StackPanel Spacing="20" HorizontalAlignment="Center">
+                    <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="64" Height="64" HorizontalAlignment="Center" />
+                    <TextBlock Text="FORGE" FontSize="26" FontWeight="Bold" LetterSpacing="4" HorizontalAlignment="Center" />
+                    <TextBlock Text="CHOISIR LA LANGUE" FontSize="18" FontWeight="SemiBold" LetterSpacing="2" HorizontalAlignment="Center" />
+                    <TextBlock Text="Select your language · Elige tu idioma" Foreground="{StaticResource ForgeMutedBrush}" FontSize="13" HorizontalAlignment="Center" />
 
-            <Button Content="FR — Français" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="FR" Width="260" HorizontalAlignment="Center" />
-            <Button Content="EN — English" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="EN" Width="260" HorizontalAlignment="Center" />
-            <Button Content="ES — Español" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="ES" Width="260" HorizontalAlignment="Center" />
+                    <StackPanel Spacing="10" Margin="0,10,0,10">
+                        <Button Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="FR" Width="280">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Border Background="#33000000" CornerRadius="4" Padding="6,2" Margin="0,0,12,0">
+                                    <TextBlock Text="FR" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Français" VerticalAlignment="Center" FontWeight="SemiBold" />
+                            </Grid>
+                        </Button>
 
-            <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="260" HorizontalAlignment="Center" Margin="0,16,0,0" />
-        </StackPanel>
+                        <Button Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="EN" Width="280">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Border Background="#33000000" CornerRadius="4" Padding="6,2" Margin="0,0,12,0">
+                                    <TextBlock Text="EN" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="English" VerticalAlignment="Center" FontWeight="SemiBold" />
+                            </Grid>
+                        </Button>
 
-        <!-- Étape 3 : Bienvenue -->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20"
+                        <Button Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="ES" Width="280">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Border Background="#33000000" CornerRadius="4" Padding="6,2" Margin="0,0,12,0">
+                                    <TextBlock Text="ES" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Español" VerticalAlignment="Center" FontWeight="SemiBold" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="280" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 2: Username Input & Karlito VIP Recognition -->
+            <Border Classes="forge-glass" Padding="28"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Name}}">
+                <StackPanel Spacing="18" HorizontalAlignment="Center">
+                    <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="64" Height="64" HorizontalAlignment="Center" />
+                    <TextBlock Text="IDENTITÉ" FontSize="20" FontWeight="Bold" LetterSpacing="3" HorizontalAlignment="Center" />
+                    <TextBlock Text="Comment on t'appelle ?" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                    <TextBlock Text="L'esprit forgé exige un nom pour sceller sa discipline."
+                               Foreground="{StaticResource ForgeMutedBrush}" TextWrapping="Wrap" TextAlignment="Center" Width="300" HorizontalAlignment="Center" />
+
+                    <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="Ton nom ou surnom"
+                             Width="300" Padding="14,12" FontSize="16" HorizontalAlignment="Center" CornerRadius="8" />
+
+                    <!-- Real-time VIP Karlito Activation Banner -->
+                    <Border Classes="forge-glass-dark" Padding="14" CornerRadius="10" Width="300"
+                            IsVisible="{Binding IsKarlitoVip}" HorizontalAlignment="Center">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="[VIP ACCÈS ILLIMITÉ DÉTECTÉ]" FontWeight="Bold" FontSize="11"
+                                       Foreground="{StaticResource ForgeGoldBrush}" HorizontalAlignment="Center" LetterSpacing="1" />
+                            <TextBlock Text="{Binding VipStatusMessage}" FontSize="12" TextWrapping="Wrap"
+                                       TextAlignment="Center" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="300" HorizontalAlignment="Center" Margin="0,8,0,0" />
+                    <Button Content="← Retour" Command="{Binding PreviousStepCommand}" HorizontalAlignment="Center" Background="Transparent" Foreground="{StaticResource ForgeMutedBrush}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 3: Swipe Gesture Interactive Tutorial -->
+            <Border Classes="forge-glass" Padding="28"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.SwipeTutorial}}">
+                <StackPanel Spacing="18" HorizontalAlignment="Center">
+                    <Border Background="{StaticResource ForgeIronBrush}" CornerRadius="20" Padding="16,6" HorizontalAlignment="Center">
+                        <TextBlock Text="LE GESTE DE LA FORGE" FontSize="12" FontWeight="Bold" LetterSpacing="2" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                    </Border>
+
+                    <TextBlock Text="Navigation par Swipe Tactile" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                    <TextBlock Text="Forge ne possède aucun bouton superflu. Tout est commandé par le geste de votre doigt :"
+                               Foreground="{StaticResource ForgeMutedBrush}" TextWrapping="Wrap" TextAlignment="Center" Width="320" />
+
+                    <!-- Visual gesture guide diagram -->
+                    <Border Background="#15000000" CornerRadius="12" Padding="16" Width="320">
+                        <StackPanel Spacing="14">
+                            <!-- Right swipe instruction -->
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Border Background="{StaticResource ForgeIronBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock Text="→" FontSize="18" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="Glisser vers la droite" FontWeight="Bold" FontSize="14" />
+                                    <TextBlock Text="Découvrir la citation suivante non vue." FontSize="12" Foreground="{StaticResource ForgeMutedBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Separator Height="1" Background="{StaticResource ForgeBorderBrush}" />
+
+                            <!-- Left swipe instruction -->
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Border Background="{StaticResource ForgeIronBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,12,0" VerticalAlignment="Center">
+                                    <TextBlock Text="←" FontSize="18" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="Glisser vers la gauche" FontWeight="Bold" FontSize="14" />
+                                    <TextBlock Text="Revenir sur les citations vues pendant la session en cours." FontSize="12" Foreground="{StaticResource ForgeMutedBrush}" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Non-repetition rule reminder -->
+                    <Border Background="#10C89B53" BorderBrush="#40C89B53" BorderThickness="1" CornerRadius="8" Padding="12" Width="320">
+                        <TextBlock Text="Rareté absolue : chaque citation vue est gravée. Une fois l'application fermée, elle ne reviendra jamais."
+                                   FontSize="11" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource ForgeIronBrush}" />
+                    </Border>
+
+                    <Button Content="J'AI COMPRIS LE GESTE" Classes="forge-button" Command="{Binding NextStepCommand}" Width="320" HorizontalAlignment="Center" Margin="0,6,0,0" />
+                    <Button Content="← Retour" Command="{Binding PreviousStepCommand}" HorizontalAlignment="Center" Background="Transparent" Foreground="{StaticResource ForgeMutedBrush}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 4: Final Welcome Step -->
+            <Border Classes="forge-glass" Padding="28"
                     IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Welcome}}">
-            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="80" Height="80" HorizontalAlignment="Center" />
-            <TextBlock Text="BIENVENUE DANS LA FORGE" FontSize="24" FontWeight="Bold" LetterSpacing="2" HorizontalAlignment="Center" />
-            <TextBlock Text="Une seule citation à la fois, jamais de répétition. Trempe ton esprit chaque jour sans compromis."
-                       TextWrapping="Wrap" TextAlignment="Center" Width="300" Foreground="{StaticResource ForgeMutedBrush}" />
+                <StackPanel Spacing="20" HorizontalAlignment="Center">
+                    <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="80" Height="80" HorizontalAlignment="Center" />
+                    <TextBlock Text="BIENVENUE DANS LA FORGE" FontSize="22" FontWeight="Bold" LetterSpacing="2" HorizontalAlignment="Center" />
+                    <TextBlock Text="Une seule citation à la fois, jamais de répétition. Trempe ton esprit chaque jour sans compromis."
+                               TextWrapping="Wrap" TextAlignment="Center" Width="300" Foreground="{StaticResource ForgeMutedBrush}" />
 
-            <Button Content="ENTRER DANS LA FORGE" Classes="forge-button" Command="{Binding FinishOnboardingCommand}" Width="280" HorizontalAlignment="Center" />
-        </StackPanel>
-    </Grid>
+                    <!-- User custom badge confirmation -->
+                    <Border Background="{StaticResource ForgeIronBrush}" CornerRadius="10" Padding="14,10" Width="300">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Text="{Binding UserName, StringFormat='Disciple : {0}'}"
+                                       FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" VerticalAlignment="Center" />
+                            <Border Grid.Column="1" Background="{StaticResource ForgeGoldBrush}" CornerRadius="4" Padding="6,2" IsVisible="{Binding IsKarlitoVip}">
+                                <TextBlock Text="VIP PREMIUM" FontSize="10" FontWeight="Bold" Foreground="#121212" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Button Content="ENTRER DANS LA FORGE" Classes="forge-button" Command="{Binding FinishOnboardingCommand}" Width="300" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </ScrollViewer>
 
 </UserControl>

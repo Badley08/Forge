@@ -1,6 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- Design system color palette and brushes -->
     <Styles.Resources>
         <Color x:Key="ForgeBackgroundColor">#F5F1E8</Color>
         <Color x:Key="ForgeTextColor">#121212</Color>
@@ -10,6 +11,11 @@
         <Color x:Key="ForgeIronColor">#1E1D1A</Color>
         <Color x:Key="ForgeGoldColor">#996515</Color>
 
+        <!-- Glassmorphism translucent colors -->
+        <Color x:Key="ForgeGlassBgColor">#88ECE7DC</Color>
+        <Color x:Key="ForgeGlassBorderColor">#66FFFFFF</Color>
+        <Color x:Key="ForgeGlassDarkColor">#CC1E1D1A</Color>
+
         <SolidColorBrush x:Key="ForgeBackgroundBrush" Color="{StaticResource ForgeBackgroundColor}" />
         <SolidColorBrush x:Key="ForgeTextBrush" Color="{StaticResource ForgeTextColor}" />
         <SolidColorBrush x:Key="ForgeMutedBrush" Color="{StaticResource ForgeMutedColor}" />
@@ -17,12 +23,17 @@
         <SolidColorBrush x:Key="ForgeBorderBrush" Color="{StaticResource ForgeBorderColor}" />
         <SolidColorBrush x:Key="ForgeIronBrush" Color="{StaticResource ForgeIronColor}" />
         <SolidColorBrush x:Key="ForgeGoldBrush" Color="{StaticResource ForgeGoldColor}" />
+        <SolidColorBrush x:Key="ForgeGlassBgBrush" Color="{StaticResource ForgeGlassBgColor}" />
+        <SolidColorBrush x:Key="ForgeGlassBorderBrush" Color="{StaticResource ForgeGlassBorderColor}" />
+        <SolidColorBrush x:Key="ForgeGlassDarkBrush" Color="{StaticResource ForgeGlassDarkColor}" />
     </Styles.Resources>
 
+    <!-- Global typography default -->
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ForgeTextBrush}" />
     </Style>
 
+    <!-- Primary forge button style -->
     <Style Selector="Button.forge-button">
         <Setter Property="Background" Value="{StaticResource ForgeIronBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForgeBackgroundBrush}" />
@@ -32,11 +43,38 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
     </Style>
 
+    <!-- Standard card style -->
     <Style Selector="Border.forge-card">
         <Setter Property="Background" Value="{StaticResource ForgeCardBgBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource ForgeBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="BoxShadow" Value="0 4 16 0 #15000000" />
+    </Style>
+
+    <!-- Glassmorphism frosted card style -->
+    <Style Selector="Border.forge-glass">
+        <Setter Property="Background" Value="{StaticResource ForgeGlassBgBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource ForgeGlassBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="BoxShadow" Value="0 8 24 0 #20000000" />
+    </Style>
+
+    <!-- Dark glassmorphism card style -->
+    <Style Selector="Border.forge-glass-dark">
+        <Setter Property="Background" Value="{StaticResource ForgeGlassDarkBrush}" />
+        <Setter Property="BorderBrush" Value="#44C89B53" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="BoxShadow" Value="0 10 30 0 #40000000" />
+    </Style>
+
+    <!-- Minimalist badge tag without emojis -->
+    <Style Selector="Border.forge-badge">
+        <Setter Property="Background" Value="{StaticResource ForgeIronBrush}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="6,2" />
     </Style>
 
 </Styles>

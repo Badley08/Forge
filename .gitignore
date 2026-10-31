@@ -14,3 +14,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.txt
+
+# .NET and Avalonia build outputs
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+PLAY_BILLING_SETUP.md
+*BILLING*.md

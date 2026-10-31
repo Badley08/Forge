@@ -31,7 +31,7 @@ public class UserRepository : IUserRepository
     public bool IsOnboardingCompleted => _preferences.IsOnboardingCompleted;
 
     /// <summary>
-    /// Le mode Premium est actif soit via achat In-App, soit via le Cheatcode personnel "Karlito".
+    /// Premium mode is active either through in-app billing or the personal VIP key ("Karlito").
     /// </summary>
     public bool IsPremium => _preferences.IsPremium || _preferences.HasKarlitoCheatcode();
 
@@ -40,7 +40,7 @@ public class UserRepository : IUserRepository
         _preferences.UserName = name;
         _preferences.UserLanguage = lang;
 
-        // Si l'utilisateur entre "Karlito", débloquer le premium automatiquement
+        // If user enters "Karlito", automatically unlock lifetime premium
         if (_preferences.HasKarlitoCheatcode())
         {
             _preferences.IsPremium = true;

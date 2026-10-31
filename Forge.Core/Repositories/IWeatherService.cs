@@ -9,7 +9,7 @@ public class WeatherService : IWeatherService
 {
     public Task<string> GetCurrentWeatherHintAsync()
     {
-        // En V1 : Estimation minimale basée sur la saison et l'heure pour influencer sobrement la citation
+        // V1: Minimal deterministic time-of-day atmospheric estimation to guide quote tone
         var hour = DateTime.Now.Hour;
         string hint = hour switch
         {

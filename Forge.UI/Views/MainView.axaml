@@ -2,21 +2,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Forge.Core.ViewModels"
              xmlns:models="using:Forge.Core.Models"
+             xmlns:controls="using:Forge.UI.Controls"
              x:Class="Forge.UI.Views.MainView"
              x:DataType="vm:MainViewModel"
              Background="{StaticResource ForgeBackgroundBrush}">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="20" Spacing="20" MaxWidth="500">
+        <StackPanel Margin="20" Spacing="20" MaxWidth="480" HorizontalAlignment="Center">
 
-            <!-- En-tête avec Logo Forge -->
+            <!-- App Header & User Identity -->
             <StackPanel HorizontalAlignment="Center" Spacing="6">
                 <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="52" Height="52" HorizontalAlignment="Center" />
-                <TextBlock Text="FORGE" FontSize="18" FontWeight="Bold" LetterSpacing="4" HorizontalAlignment="Center" />
-                <TextBlock Text="{Binding UserName, StringFormat='Discipline de {0}'}" FontSize="13" Foreground="{StaticResource ForgeMutedBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="FORGE" FontSize="20" FontWeight="Bold" LetterSpacing="4" HorizontalAlignment="Center" />
+
+                <!-- User status and VIP indicator -->
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding UserName, StringFormat='Discipline de {0}'}"
+                               FontSize="13" Foreground="{StaticResource ForgeMutedBrush}" VerticalAlignment="Center" />
+                    <Border Background="{StaticResource ForgeGoldBrush}" CornerRadius="4" Padding="6,2"
+                            IsVisible="{Binding IsKarlitoVip}" VerticalAlignment="Center">
+                        <TextBlock Text="VIP PREMIUM" FontSize="9" FontWeight="Bold" Foreground="#121212" />
+                    </Border>
+                </StackPanel>
             </StackPanel>
 
-            <!-- Sélecteur de Catégories (10 Catégories) -->
+            <!-- 10 Categories Horizontal Selector -->
             <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                 <ItemsControl ItemsSource="{Binding Categories}">
                     <ItemsControl.ItemsPanel>
@@ -29,11 +39,14 @@
                             <Button Classes="forge-button"
                                     Command="{Binding $parent[UserControl].((vm:MainViewModel)DataContext).SelectCategoryCommand}"
                                     CommandParameter="{Binding}"
-                                    Padding="12,6" FontSize="12">
+                                    Padding="14,8" FontSize="12">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <TextBlock Text="{Binding DisplayName}" />
-                                    <!-- Cadenas discret si verrouillé -->
-                                    <TextBlock Text="🔒" FontSize="10" IsVisible="{Binding !IsFreeCategory}" />
+                                    <!-- Discreet locked badge without emoji -->
+                                    <Border Background="#44000000" CornerRadius="3" Padding="4,1"
+                                            IsVisible="{Binding !IsFreeCategory}">
+                                        <TextBlock Text="PRO" FontSize="9" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                    </Border>
                                 </StackPanel>
                             </Button>
                         </DataTemplate>
@@ -41,63 +54,124 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- État : Stock Épuisé -->
-            <Border Classes="forge-card" Padding="24" IsVisible="{Binding IsStockExhausted}">
+            <!-- Stock Exhausted State Screen -->
+            <Border Classes="forge-glass-dark" Padding="28" IsVisible="{Binding IsStockExhausted}">
                 <StackPanel Spacing="16" HorizontalAlignment="Center">
-                    <TextBlock Text="FORGE CONQUISE" FontWeight="Bold" LetterSpacing="2" HorizontalAlignment="Center" />
-                    <TextBlock Text="Tu as tout lu. On n'a plus de Forge pour aujourd'hui."
-                               FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" TextAlignment="Center" />
-                    <TextBlock Text="Ton appétit pour la discipline a dévoré tout notre stock en une bouchée. L'acier a besoin de temps pour refroidir et se durcir."
-                               TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource ForgeMutedBrush}" />
-                    <Border Background="{StaticResource ForgeBackgroundBrush}" CornerRadius="8" Padding="14">
+                    <Border Background="{StaticResource ForgeGoldBrush}" CornerRadius="4" Padding="8,3" HorizontalAlignment="Center">
+                        <TextBlock Text="FORGE CONQUISE" FontWeight="Bold" FontSize="11" Foreground="#121212" LetterSpacing="2" />
+                    </Border>
+                    <TextBlock Text="Tu as tout lu." FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                    <TextBlock Text="On n'a plus de Forge pour aujourd'hui."
+                               FontSize="18" FontWeight="SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                    <TextBlock Text="Ton appétit pour la discipline a forgé toutes les sentences disponibles dans cette catégorie. L'acier a besoin de temps pour refroidir et se durcir."
+                               TextWrapping="Wrap" TextAlignment="Center" Foreground="#A0FAF8F5" FontSize="13" />
+                    <Border Background="#25FFFFFF" CornerRadius="8" Padding="14">
                         <TextBlock Text="Reviens demain, on forge les suivantes pour toi."
-                                   FontWeight="SemiBold" TextAlignment="Center" />
+                                   FontWeight="SemiBold" TextAlignment="Center" Foreground="{StaticResource ForgeBackgroundBrush}" />
                     </Border>
                 </StackPanel>
             </Border>
 
-            <!-- Carte Citation Active (Swipe) -->
-            <Border Classes="forge-card" Padding="20" IsVisible="{Binding !IsStockExhausted}">
-                <StackPanel Spacing="16">
-                    <!-- Couverture thématique de la catégorie -->
-                    <Border CornerRadius="12" ClipToBounds="True" Height="140">
-                        <Image Source="{Binding CurrentCoverAsset}" Stretch="UniformToFill" />
-                    </Border>
+            <!-- Active Quote Card (Gesture-Driven Swipe & Atmospheric Effects) -->
+            <Grid IsVisible="{Binding !IsStockExhausted}">
+                <Border x:Name="QuoteCardContainer" Classes="forge-glass" Padding="22" ClipToBounds="True">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform x:Name="CardTranslate" X="0" Y="0" />
+                            <RotateTransform x:Name="CardRotate" Angle="0" />
+                        </TransformGroup>
+                    </Border.RenderTransform>
 
-                    <!-- Numéro du Jour -->
-                    <TextBlock Text="{Binding CurrentQuote.Day, StringFormat='JOUR {0}'}"
-                               FontWeight="Bold" LetterSpacing="2" HorizontalAlignment="Center" Foreground="{StaticResource ForgeMutedBrush}" />
+                    <Grid>
+                        <!-- Atmospheric procedural weather background canvas -->
+                        <controls:WeatherAtmosphereControl
+                            WeatherHint="{Binding CurrentWeatherHint}"
+                            IsHitTestVisible="False"
+                            Opacity="0.55" />
 
-                    <!-- Citation -->
-                    <TextBlock Text="{Binding CurrentQuote.Text, StringFormat='« {0} »'}"
-                               FontSize="22" FontWeight="Normal" TextWrapping="Wrap" TextAlignment="Center" LineHeight="32" />
+                        <StackPanel Spacing="16">
+                            <!-- Category visual cover banner -->
+                            <Border CornerRadius="12" ClipToBounds="True" Height="140">
+                                <Image Source="{Binding CurrentCoverAsset}" Stretch="UniformToFill" />
+                            </Border>
 
-                    <!-- Indicateur de Swipe / Navigation -->
-                    <Grid ColumnDefinitions="*,*">
-                        <Button Grid.Column="0" Content="← Précédent" Command="{Binding SwipePreviousCommand}" HorizontalAlignment="Left" />
-                        <Button Grid.Column="1" Content="Suivant →" Command="{Binding SwipeNextCommand}" HorizontalAlignment="Right" Classes="forge-button" />
+                            <!-- Day and Weather Status -->
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{Binding CurrentQuote.Day, StringFormat='JOUR {0}'}"
+                                           FontWeight="Bold" LetterSpacing="2" Foreground="{StaticResource ForgeMutedBrush}" VerticalAlignment="Center" />
+                                <Border Grid.Column="1" Background="#15000000" CornerRadius="6" Padding="8,3">
+                                    <TextBlock Text="{Binding CurrentWeatherHint, StringFormat='MÉTÉO : {0}'}"
+                                               FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource ForgeMutedBrush}" />
+                                </Border>
+                            </Grid>
+
+                            <!-- Quote Content Text -->
+                            <TextBlock Text="{Binding CurrentQuote.Text, StringFormat='« {0} »'}"
+                                       FontSize="22" FontWeight="Normal" TextWrapping="Wrap" TextAlignment="Center" LineHeight="32" Margin="6,10" />
+
+                            <!-- Interactive gesture navigation hint -->
+                            <Border Background="#12000000" CornerRadius="8" Padding="12,8">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <TextBlock Text="← Session" FontSize="11" Foreground="{StaticResource ForgeMutedBrush}"
+                                               IsVisible="{Binding CanSwipePrevious}" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Glisser pour forger" FontSize="11" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="{StaticResource ForgeMutedBrush}" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="Suivante →" FontSize="11" Foreground="{StaticResource ForgeMutedBrush}"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
                     </Grid>
-                </StackPanel>
-            </Border>
+                </Border>
+            </Grid>
 
-            <!-- Actions : Partage -->
-            <Button Content="PARTAGER L'IMAGE (PREMIUM)" Classes="forge-button"
-                    Command="{Binding ShareQuoteCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+            <!-- Watermarked Share Action (Premium Only) -->
+            <StackPanel Spacing="6">
+                <Button Content="PARTAGER L'IMAGE FILIGRANÉE (PREMIUM)" Classes="forge-button"
+                        Command="{Binding ShareQuoteCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+                <TextBlock Text="{Binding ShareStatusMessage}" FontSize="11" FontWeight="Bold"
+                           HorizontalAlignment="Center" Foreground="{StaticResource ForgeGoldBrush}"
+                           IsVisible="{Binding ShareStatusMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            </StackPanel>
 
-            <!-- Card Widget Floutée avec Cadenas (Free vs Premium) -->
-            <Border Classes="forge-card" Padding="16">
+            <!-- Home Screen Animated Widget Preview with Glassmorphism & Weather Effects -->
+            <Border Classes="forge-glass" Padding="18" ClipToBounds="True">
                 <Grid>
-                    <StackPanel Spacing="8" Opacity="0.5">
-                        <TextBlock Text="Aperçu du Widget Écran d'accueil" FontWeight="SemiBold" />
-                        <TextBlock Text="« La discipline est le pont entre les buts et l'accomplissement. »" FontSize="13" />
-                        <TextBlock Text="Forge Widget 4x2 · Partage HD activé" FontSize="11" Foreground="{StaticResource ForgeMutedBrush}" />
-                    </StackPanel>
+                    <!-- Atmospheric weather canvas running behind the widget preview -->
+                    <controls:WeatherAtmosphereControl
+                        WeatherHint="{Binding CurrentWeatherHint}"
+                        IsHitTestVisible="False"
+                        Opacity="0.6" />
 
-                    <Border Background="#D0F5F1E8" CornerRadius="12" Padding="12" IsVisible="{Binding !IsPremium}">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
-                            <TextBlock Text="Forge Premium — Widgets + Partage" FontWeight="Bold" HorizontalAlignment="Center" />
-                            <Button Content="Débloquer à vie · 2,99 €" Classes="forge-button"
-                                    Command="{Binding TriggerPurchaseCommand}" HorizontalAlignment="Center" />
+                    <!-- Inner frosted glass card for the widget -->
+                    <Border Classes="forge-glass" Padding="16" Margin="2">
+                        <StackPanel Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Widget Écran d'accueil Forge (4x2)" FontWeight="Bold" FontSize="13" VerticalAlignment="Center" />
+                                <Border Grid.Column="1" Background="{StaticResource ForgeIronBrush}" CornerRadius="4" Padding="6,2">
+                                    <TextBlock Text="LIVE" FontSize="9" FontWeight="Bold" Foreground="{StaticResource ForgeBackgroundBrush}" />
+                                </Border>
+                            </Grid>
+
+                            <TextBlock Text="« La discipline est le pont entre les buts et l'accomplissement. »"
+                                       FontSize="13" TextWrapping="Wrap" Margin="0,4" />
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Météo synchronisée &amp; Partage HD" FontSize="11" Foreground="{StaticResource ForgeMutedBrush}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="{Binding CurrentWeatherHint, StringFormat='Atmosphère : {0}'}" FontSize="10" Foreground="{StaticResource ForgeGoldBrush}" VerticalAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Premium unlock overlay for free tier -->
+                    <Border Classes="forge-glass-dark" CornerRadius="14" Padding="16"
+                            IsVisible="{Binding !IsPremium}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
+                            <TextBlock Text="FORGE PREMIUM" FontWeight="Bold" FontSize="14" Foreground="{StaticResource ForgeGoldBrush}" HorizontalAlignment="Center" LetterSpacing="2" />
+                            <TextBlock Text="Widgets d'écran d'accueil dynamiques &amp; Partage filigrané illimité"
+                                       FontSize="12" Foreground="{StaticResource ForgeBackgroundBrush}" TextWrapping="Wrap" TextAlignment="Center" />
+                            <Button Content="{Binding FormattedPrice, StringFormat='DÉBLOQUER À VIE · {0}'}" Classes="forge-button"
+                                    Command="{Binding TriggerPurchaseCommand}" HorizontalAlignment="Center" Padding="20,10" />
                         </StackPanel>
                     </Border>
                 </Grid>

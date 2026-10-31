@@ -30,33 +30,25 @@ public class ForgeDbContext
     }
 
     /// <summary>
-    /// Charge strictement 1 citation non vue, influencée par la météo et le jour sans dump en mémoire.
+    /// Retrieves a single unseen quote influenced by weather hint and day order.
+    /// Returns null when quotes for the given category and language are exhausted.
     /// </summary>
     public async Task<QuoteRecord?> GetNextUnseenQuoteAsync(string lang, string category, string weather)
     {
         await InitializeAsync();
 
-        // 1. Cherche en priorité avec la météo correspondante
+        // 1. Primary query: match category, language, and specific weather hint (or 'any')
         var query = _db.Table<QuoteRecord>()
             .Where(q => !q.IsSeen && q.Lang == lang && q.Category == category && (q.WeatherHint == weather || q.WeatherHint == "any"))
             .OrderBy(q => q.Day);
 
         var quote = await query.FirstOrDefaultAsync();
 
-        // 2. Si aucune citation météo spécifique, repli sur n'importe quelle citation non vue de la catégorie
+        // 2. Fallback within the same category if no specific weather match exists
         if (quote == null)
         {
             quote = await _db.Table<QuoteRecord>()
                 .Where(q => !q.IsSeen && q.Lang == lang && q.Category == category)
-                .OrderBy(q => q.Day)
-                .FirstOrDefaultAsync();
-        }
-
-        // 3. Si toujours aucune citation dans cette catégorie, repli sur n'importe quelle catégorie
-        if (quote == null)
-        {
-            quote = await _db.Table<QuoteRecord>()
-                .Where(q => !q.IsSeen && q.Lang == lang)
                 .OrderBy(q => q.Day)
                 .FirstOrDefaultAsync();
         }

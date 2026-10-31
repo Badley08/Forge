@@ -3,8 +3,8 @@ namespace Forge.Data.RemoteQuoteSource;
 public interface IRemoteQuoteSyncService
 {
     /// <summary>
-    /// Réservé pour la V2 : Téléchargement sécurisé des citations distantes depuis le dépôt privé GitHub.
-    /// Signature vide en V1 conformément aux spécifications du projet.
+    /// Reserved for V2: Secure remote quote synchronization from a private index.
+    /// In V1, this remains a stub implementation as specified.
     /// </summary>
     Task SyncFromRemoteAsync();
 }
@@ -13,7 +13,7 @@ public class RemoteQuoteSyncService : IRemoteQuoteSyncService
 {
     public Task SyncFromRemoteAsync()
     {
-        // V1 : Prêt pour la V2, aucune synchronisation distante active pour le moment.
+        // V1: Remote synchronization is deferred to V2
         return Task.CompletedTask;
     }
 }

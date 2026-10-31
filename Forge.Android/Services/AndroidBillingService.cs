@@ -4,9 +4,15 @@ using Plugin.InAppBilling;
 
 namespace Forge.Android.Services;
 
+/// <summary>
+/// Native Android In-App Billing provider wrapping Google Play Billing.
+/// Retrieves real store pricing for forge_premium_lifetime ($3.99) and executes purchases.
+/// </summary>
 public class AndroidBillingService : IBillingService
 {
     public const string ProductId = "forge_premium_lifetime";
+    public const string DefaultPrice = "3,99 $";
+
     private readonly IPreferencesService _preferences;
 
     public AndroidBillingService(IPreferencesService preferences)
@@ -14,9 +20,33 @@ public class AndroidBillingService : IBillingService
         _preferences = preferences;
     }
 
+    public async Task<string> GetProductPriceAsync()
+    {
+        try
+        {
+            var billing = CrossInAppBilling.Current;
+            var connected = await billing.ConnectAsync();
+            if (connected)
+            {
+                var items = await billing.GetProductInfoAsync(ItemType.InAppPurchase, ProductId);
+                var item = items?.FirstOrDefault(i => i.ProductId == ProductId);
+                if (!string.IsNullOrWhiteSpace(item?.LocalizedPrice))
+                {
+                    return item.LocalizedPrice;
+                }
+            }
+        }
+        catch
+        {
+            // Fallback to configured retail price
+        }
+
+        return DefaultPrice;
+    }
+
     public async Task<bool> CheckIsPremiumAsync()
     {
-        // Cheatcode VIP Karlito
+        // VIP bypass key check
         if (_preferences.HasKarlitoCheatcode()) return true;
 
         try
@@ -43,7 +73,7 @@ public class AndroidBillingService : IBillingService
 
     public async Task<bool> PurchasePremiumAsync()
     {
-        // Cheatcode VIP Karlito
+        // VIP bypass key check
         if (_preferences.HasKarlitoCheatcode())
         {
             _preferences.IsPremium = true;
@@ -65,7 +95,7 @@ public class AndroidBillingService : IBillingService
         }
         catch
         {
-            // Error handling
+            // Error handling during purchase workflow
         }
 
         return false;

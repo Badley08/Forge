@@ -25,7 +25,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {
-        // FLAG_SECURE actif sur toute l'application pour bloquer captures et enregistrements
+        // Enable FLAG_SECURE across the application to prevent screen captures and recordings
         Window?.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
         base.OnCreate(savedInstanceState);

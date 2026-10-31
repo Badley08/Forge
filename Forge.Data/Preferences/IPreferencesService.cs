@@ -9,7 +9,7 @@ public interface IPreferencesService
     bool IsPremium { get; set; }
 
     /// <summary>
-    /// Vérifie si l'utilisateur bénéficie du cheatcode VIP "Karlito"
+    /// Checks if the username matches the VIP bypass key ("Karlito").
     /// </summary>
     bool HasKarlitoCheatcode();
 }
