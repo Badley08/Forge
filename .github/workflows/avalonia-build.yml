@@ -1,0 +1,42 @@
+name: Build Avalonia Android APK
+
+on:
+  push:
+    branches: [ avalonia ]
+  pull_request:
+    branches: [ avalonia ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Avalonia Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Install Android Workload
+        run: dotnet workload install android --verbosity normal
+
+      - name: Restore Dependencies
+        run: dotnet restore Forge.sln
+
+      - name: Build Core & UI
+        run: dotnet build Forge.Core/Forge.Core.csproj -c Release && dotnet build Forge.UI/Forge.UI.csproj -c Release
+
+      - name: Build Android Package
+        run: dotnet build Forge.Android/Forge.Android.csproj -c Release -f net9.0-android
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-avalonia-apk
+          path: Forge.Android/bin/Release/net9.0-android/*Signed.apk
+          if-no-files-found: ignore
+          retention-days: 14

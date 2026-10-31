@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Forge.Core.ViewModels"
+             x:Class="Forge.UI.Views.OnboardingView"
+             x:DataType="vm:OnboardingViewModel"
+             Background="{StaticResource ForgeBackgroundBrush}">
+
+    <Grid Margin="24">
+        <!-- Étape 1 : Nom -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Name}}">
+            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="72" Height="72" HorizontalAlignment="Center" />
+            <TextBlock Text="FORGE" FontSize="26" FontWeight="Bold" LetterSpacing="4" HorizontalAlignment="Center" />
+            <TextBlock Text="Comment on t'appelle ?" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Center" />
+            <TextBlock Text="L'esprit forgé exige un nom pour sceller sa discipline." Foreground="{StaticResource ForgeMutedBrush}" HorizontalAlignment="Center" />
+
+            <TextBox Text="{Binding UserName, Mode=TwoWay}" Watermark="Ton nom ou surnom" Width="280" HorizontalAlignment="Center" />
+
+            <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="280" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Étape 2 : Langue -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Language}}">
+            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="72" Height="72" HorizontalAlignment="Center" />
+            <TextBlock Text="LANGUE" FontSize="24" FontWeight="Bold" LetterSpacing="3" HorizontalAlignment="Center" />
+            <TextBlock Text="Dans quelle langue forger ton esprit ?" FontSize="18" HorizontalAlignment="Center" />
+
+            <Button Content="FR — Français" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="FR" Width="260" HorizontalAlignment="Center" />
+            <Button Content="EN — English" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="EN" Width="260" HorizontalAlignment="Center" />
+            <Button Content="ES — Español" Classes="forge-button" Command="{Binding SelectLanguageCommand}" CommandParameter="ES" Width="260" HorizontalAlignment="Center" />
+
+            <Button Content="CONTINUER" Classes="forge-button" Command="{Binding NextStepCommand}" Width="260" HorizontalAlignment="Center" Margin="0,16,0,0" />
+        </StackPanel>
+
+        <!-- Étape 3 : Bienvenue -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20"
+                    IsVisible="{Binding CurrentStep, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static vm:OnboardingStep.Welcome}}">
+            <Image Source="avares://Forge.UI/Assets/forge-light.png" Width="80" Height="80" HorizontalAlignment="Center" />
+            <TextBlock Text="BIENVENUE DANS LA FORGE" FontSize="24" FontWeight="Bold" LetterSpacing="2" HorizontalAlignment="Center" />
+            <TextBlock Text="Une seule citation à la fois, jamais de répétition. Trempe ton esprit chaque jour sans compromis."
+                       TextWrapping="Wrap" TextAlignment="Center" Width="300" Foreground="{StaticResource ForgeMutedBrush}" />
+
+            <Button Content="ENTRER DANS LA FORGE" Classes="forge-button" Command="{Binding FinishOnboardingCommand}" Width="280" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+
+</UserControl>
