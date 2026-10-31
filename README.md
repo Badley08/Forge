@@ -1,116 +1,117 @@
-# ⚔️ FORGE — Daily Stoic Discipline
+# [FORGE] Daily Stoic Discipline
 
-Application Android 100% native développée en **Kotlin** et **Jetpack Compose**.  
-Forge est conçue comme un sanctuaire quotidien de discipline personnelle et de trempe de l'esprit.
+> **[PROPRIETARY SOFTWARE — ALL RIGHTS RESERVED — STRICT NO-PLAGIARISM]**  
+> Ce logiciel, son architecture, ses concepts visuels, son moteur de citations et ses algorithmes météo sont la propriété exclusive de **Karlito Dev**. Toute copie, réutilisation de code, plagiat de concept ou extraction de données est formellement interdite.
 
----
-
-## 🎨 Identité Visuelle & Logos Officiels
-
-L'application dispose de deux logos vectorisés haute résolution :
-
-- **`app/forge-light.png`** : Le sceau officiel clair (utilisé comme icône de l'application et visuel d'accueil).
-- **`app/forge-dark.png`** : La variante sombre (adaptée aux thèmes nocturnes et aux rendus d'enclume).
+Application native multiplateforme développée en **C# (.NET 9)** avec **Avalonia UI**, dédiée à la discipline stoïcienne quotidienne et à la trempe de la volonté.
 
 ---
 
-## 🖼️ Catégories & Dossier `covers/`
+## [CAMEO: VISION] Philosophie & Rareté Absolue
 
-Le dossier `covers/` contient les couvertures artistiques dédiées à chaque grande catégorie de pensée et de discipline de la Forge :
+Forge n'est pas un flux infini. C'est un sanctuaire à **une seule pensée à la fois** : on ouvre l'application, on s'imprègne de la maxime, on glisse, on avance.
 
-| Fichier Couverture | Catégorie Associée | Thématique de Forge |
+### Principes Fondamentaux de la Forge :
+- **[DISCIPLINE] Une seule pensée à la fois** : Aucun défilement infini, pas de liste distraite.
+- **[RARITY] Rareté réelle** : Chaque pensée vue est consommée et ne revient jamais après fermeture.
+- **[ZERO-TRACKING] Confidentialité intégrale** : Zéro SDK publicitaire, zéro collecte d'identifiants d'appareil, zéro télémétrie.
+- **[ZERO-EMOJI] Épuration esthétique** : Zéro émoji dans toute l'interface afin de préserver la gravité, l'élégance et la sobriété stoïcienne.
+- **[INTEGRITY] Anonymat total des sources** : Aucune étiquette d'auteur ni provenance externe n'apparaît. La pensée se confronte directement à l'esprit sans intermédiaire.
+
+---
+
+## [CAMEO: DESIGN] Interface Glassmorphism & Atmosphères Animées
+
+L'interface tire parti des capacités de rendu graphique d'**Avalonia UI** :
+
+- **[GLASS] Finition Glassmorphism** : Cartes translucides frosted-glass avec bordures spéculaires douces, profondeur visuelle et contrastes minéraux (`#F5F1E8`, `#1E1D1A`, `#C89B53`).
+- **[WEATHER] Atmosphère Procédurale Animée** :
+  - **Pluie (`rain`)** : Traînées cinétiques fluides avec dérive au vent.
+  - **Neige (`snow`)** : Flocons légers oscillant harmoniquement sur la carte.
+  - **Soleil (`sunny`)** : Pulsation radiale douce de l'aura dorée.
+  - **Nuageux (`cloudy`)** : Nébuleuses brumeuses glissant à l'arrière-plan.
+- **[GESTURE] Navigation 100% Geste (Swipe Tactile)** :
+  - Glissement vers la droite (`→`) : Découverte de la prochaine pensée non vue.
+  - Glissement vers la gauche (`←`) : Retour sur les pensées vues pendant la session active.
+  - Translation interactive avec inclinaison angulaire (`RotateTransform`) et fondu d'opacité.
+
+---
+
+## [CAMEO: CATALOG] Les 10 Catégories de Discipline
+
+L'application intègre un jeu complet de 70 pensées par langue (210 pensées au total en Français, Anglais et Espagnol) réparties sur 10 voies :
+
+| Cameo | Catégorie | Thématique & Trempe |
 | :--- | :--- | :--- |
-| `covers/discipline.jpeg` | **Discipline** | Rigueur quotidienne, persévérance et trempe du caractère. |
-| `covers/action.jpeg` | **Action** | Passage à l'acte immédiat, refus de la procrastination. |
-| `covers/resilience.jpeg` | **Résilience** | Résistance face à l'adversité et aux épreuves. |
-| `covers/stoicism.jpeg` | **Stoïcisme** | Maîtrise absolue des impulsions et alignement intérieur. |
-| `covers/ambition.jpeg` | **Ambition** | Élévation exigeante, dépassement de soi sans compromis. |
-| `covers/lucidity.jpeg` | **Lucidité** | Clarté d'esprit, discernement entre ce qui dépend de nous et le reste. |
-| `covers/calm.jpeg` | **Calme** | Sérénité inébranlable au cœur du tumulte et du chaos. |
-| `covers/detachment.jpeg` | **Détachement** | Lâcher-prise souverain sur les événements extérieurs incontrôlables. |
-| `covers/philosophic.jpeg` | **Philosophie** | Méditation profonde et recherche constante de la vérité. |
-| `covers/poetic.jpeg` | **Poétique** | Regard noble sur le monde et intensité de l'existence. |
+| `[DISCIPLINE]` | **Discipline** | Rigueur quotidienne, persévérance inébranlable et maîtrise des pulsions. |
+| `[ACTION]` | **Action** | Passage à l'acte immédiat, refus viscéral de la procrastination. |
+| `[RESILIENCE]` | **Résilience** | Force de caractère face à l'adversité et absorption des épreuves. |
+| `[STOICISM]` | **Stoïcisme** | Aligné sur ce qui dépend de nous, détachement du reste. |
+| `[AMBITION]` | **Ambition** | Élévation exigeante, dépassement de l'homme qu'on était hier. |
+| `[LUCIDITY]` | **Lucidité** | Clarté de jugement, discernement tranchant pour dissoudre l'illusion. |
+| `[CALM]` | **Calme** | Sérénité souveraine au milieu du chaos et de la tourmente. |
+| `[DETACHMENT]` | **Détachement** | Lâcher-prise total sur les événements extérieurs et la fortune. |
+| `[PHILOSOPHY]` | **Philosophie** | Exercice pratique de vivre avec droiture et quête de vérité. |
+| `[POETIC]` | **Poétique** | Regard noble sur l'existence et intensité de chaque souffle. |
 
 ---
 
-## 📜 Philosophie des Citations & MAJ Automatique
+## [CAMEO: VIP] Déverrouillage VIP Personnel (« Karlito »)
 
-### 1. Règle d'or : Anonymat strict des citations
-> **IMPORTANT :** Ne **jamais mentionner d'où viennent les citations**. Aucune source extérieure, aucun nom d'auteur ni référence historique ne doit apparaître dans l'application ou les partages. Chaque phrase est une pensée brute de la Forge, universelle et intemporelle, destinée à être directement confrontée à la volonté de l'utilisateur.
-
-### 2. MAJ Automatique des Citations (Quotes)
-Pour la synchronisation et l'ajout continu de nouveau contenu :
-- **Vocabulaire anglais** : Privilégier systématiquement le terme **`quotes`** plutôt que "citations".
-- **Traduction contextuelle (Pas de mot-à-mot)** : Lors du passage d'une langue à une autre (FR / EN / ES), **ne jamais traduire mot à mot**. Traduire **contexte par contexte** pour préserver la frappe, le rythme, l'impact psychologique et l'autorité naturelle du message.
-- **Création de citations originales** : L'écosystème Forge encourage la rédaction de **citations inédites**, créées spécialement pour forger le mental, aiguiser la volonté et maintenir une discipline d'acier au quotidien.
-
----
-
-## 🗝️ Cheatcode Personnel VIP ("Karlito")
-
-Un mécanisme de déblocage exclusif est intégré au cœur de la gestion des utilisateurs :
-- **Activation** : Si le nom d'utilisateur saisi (lors de l'onboarding ou dans les préférences) est **`Karlito`** (insensible à la casse, ex. `karlito`), l'accès au **Mode Premium est immédiatement et définitivement débloqué à vie**.
-- **Effets** :
-  - La carte Widget verrouillée se déverrouille instantanément.
-  - Le bouton de partage haute fidélité est débloqué sans requérir d'achat Google Play.
-  - Aucun tracking ni vérification externe requise pour ce profil.
+Un mécanisme de reconnaissance VIP direct est intégré au moteur :
+- **Activation** : Saisir **`Karlito`** comme nom d'utilisateur (insensible à la casse, ex. `karlito`).
+- **Effets immédiats** :
+  - Déblocage automatique à vie de la totalité des 10 catégories.
+  - Activation sans restriction des widgets d'écran d'accueil avec animations météo.
+  - Autorisation du partage filigrané haute fidélité.
+  - Affichage du badge exclusif `[VIP PREMIUM]` dans l'en-tête et l'onboarding.
 
 ---
 
-## 🏛️ Architecture Technique
+## [CAMEO: ARCHITECTURE] Architecture C# & Avalonia UI
 
-### 1. Structure Modulaire
 ```
-FORGE/
-├── app/
-│   ├── forge-light.png                  # Logo officiel clair
-│   ├── forge-dark.png                   # Logo officiel sombre
-│   └── src/main/
-│       ├── AndroidManifest.xml          # FLAG_SECURE & FileProvider
-│       ├── res/
-│       │   └── drawable/                # Logos et covers intégrés
-│       └── java/com/karlitodev/forge/
-│           ├── data/
-│           │   ├── local/               # Room Database (quotes, users)
-│           │   ├── preferences/         # DataStore Preferences
-│           │   ├── billing/             # Google Play Billing v6
-│           │   └── repository/          # ForgeRepository & Cheatcode Karlito
-│           └── ui/
-│               ├── theme/               # Material 3 (#F5F1E8 & #121212)
-│               ├── onboarding/          # Onboarding 3 étapes avec AnimatedContent
-│               └── main/                # MainScreen, PremiumWidgetCard, Sceau Partage
-├── covers/                              # Visuels originaux des catégories
-└── .github/workflows/build.yml          # Pipeline CI/CD GitHub Actions
+Forge/
+├── Forge.Core/                 [Logique Métier & MVVM]
+│   ├── Models/                 QuoteModel, QuoteCategory
+│   ├── ViewModels/             MainViewModel, OnboardingViewModel, ViewModelBase
+│   └── Repositories/           IQuoteRepository, IUserRepository, IBillingService, IWeatherService
+├── Forge.Data/                 [Persistance & Base Locale]
+│   ├── Local/                  ForgeDbContext (SQLite async), InitialQuotesSeed (210 quotes)
+│   ├── Preferences/            PreferencesService (Stockage chiffré & Cheatcode Karlito)
+│   └── RemoteQuoteSource/      IRemoteQuoteSyncService (Stub V1 pour sync V2)
+├── Forge.UI/                   [Couche Graphique & XAML]
+│   ├── Controls/               WeatherAtmosphereControl (Moteur météo particulaire)
+│   ├── Views/                  MainView (Swipe drag), OnboardingView (Tutoriel gestuel)
+│   ├── Styles/                 ForgeTheme.axaml (Tokens Glassmorphism)
+│   └── Assets/                 Covers officiels & Logos vectorisés
+└── Forge.Android/              [Tête de Plateforme Mobile]
+    ├── MainActivity.cs         FLAG_SECURE, Injection des services
+    ├── AndroidManifest.xml     Permissions, Sécurité
+    └── Services/               AndroidBillingService (Google Play Billing v7.1.0)
 ```
 
-### 2. Base de Données Room & Règle Mémoire
-- **Tables** : `quotes(id, text, lang, day, isSeen)` et `users(id, name, lang)`.
-- **Zéro surcharge mémoire** : L'application ne charge **jamais** l'intégralité des données en mémoire vive au démarrage. Elle interroge la base via une requête unitaire stricte (`LIMIT 1`).
-- **Citation unique** : Une fois affichée, la citation est marquée `isSeen = true`. Elle ne revient **jamais**.
-- **Écran de complétion stoïque** : Lorsque tout le stock est lu, l'écran de fin stoïque s'affiche :  
-  *"Tu as tout lu. On n'a plus de Forge pour aujourd'hui. Reviens demain, on forge les suivantes pour toi."*
+---
 
-### 3. Sécurité Absolue & `FLAG_SECURE`
-- Activé au niveau de la fenêtre système dans `MainActivity` :
-  ```kotlin
-  window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
-  ```
-- Bloque systématiquement toute capture d'écran et tout enregistrement vidéo sur tous les téléphones Android (Free & Premium).
+## [CAMEO: SECURITY] Protection des Données & Anti-Copie
 
-### 4. Partage Haute Définition avec Filigrane Invisible IA
-- Les utilisateurs Premium bénéficient d'un export d'image Bitmap (1080x1350) stylisée sur mesure.
-- **Watermark IA** : En bas à droite, à **8% d'opacité** (`alpha = 0.08`), le sceau `FORGE · <hash SHA-256>` est discrètement incrusté. Quasi invisible à l'œil nu, il reste détectable par les algorithmes d'analyse et d'IA.
-- **Zéro texte brut** : Le texte n'est jamais copié/collé en clair pour protéger le sanctuaire de contenu.
-
-### 5. Monétisation & Play Billing v6
-- Produit In-App officiel : `forge_premium_lifetime` (2,99 €).
-- Vérification sécurisée native via `queryPurchasesAsync`, sans tracking d'appareil ni permissions intrusives.
+- **[FLAG_SECURE] Anti-Capture** : Protection matérielle activée sur la fenêtre Android bloquant toute capture d'écran et tout enregistrement vidéo.
+- **[WATERMARK] Partage Filigrané** : Aucun texte brut copiable. Le partage Premium produit un visuel avec micro-sceau d'authentification IA transparent à 8% (`FORGE · SHA256`).
+- **[STORE] Monétisation Google Play** : Achat unique à vie configuré à **3,99 $ USD** (`forge_premium_lifetime`).
 
 ---
 
-## ☁️ CI/CD & Compilation Cloud (0 Go de RAM locale)
+## [CAMEO: CI-CD] Compilation Automatisée GitHub Actions
 
-Pour les postes de développement disposant de ressources restreintes (ex. 3 Go de RAM), aucun build local lourd n'est requis.
-- Chaque push sur la branche `main` déclenche le workflow GitHub Actions [`.github/workflows/build.yml`](.github/workflows/build.yml).
-- Les serveurs GitHub (16 Go de RAM) compilent l'APK de debug en moins de 4 minutes.
-- L'APK est directement téléchargeable depuis l'onglet **Actions** du dépôt GitHub.
+Le workflow automatisé [`.github/workflows/avalonia-build.yml`](.github/workflows/avalonia-build.yml) se déclenche à chaque push sur la branche `avalonia` :
+- Restauration des dépendances .NET 9 et du workload Android.
+- Compilation Release de `Forge.Core`, `Forge.UI` et `Forge.Android`.
+- Génération et archivage automatique de l'APK installable sans consommer les ressources de la machine locale.
+
+---
+
+## [CAMEO: LICENSE] Licence Propriétaire & Anti-Plagiat
+
+Ce logiciel est sous licence propriétaire exclusive de **Karlito Dev** (voir [LICENSE](LICENSE)) :
+- **Interdiction formelle de plagiat, clonage ou réplication** du concept, du design, des citations et de l'architecture.
+- **Tous droits réservés (All Rights Reserved)** — Karlito Dev.
