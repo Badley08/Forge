@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0-android</TargetFramework>
     <SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
+    <TargetPlatformVersion>37</TargetPlatformVersion>
     <ApplicationId>com.karlitodev.forge</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -11,11 +12,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!-- Release-only: R8 shrinking, obfuscation and signing via CI secrets -->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidLinkTool>r8</AndroidLinkTool>
     <EnableProguard>true</EnableProguard>
     <AndroidEnableProguardMappingFile>true</AndroidEnableProguardMappingFile>
+    <AndroidSigningKeyStore>$(KeystorePath)</AndroidSigningKeyStore>
+    <AndroidSigningKeyAlias>$(KeystoreAlias)</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>$(KeystoreKeyPass)</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>$(KeystoreStorePass)</AndroidSigningStorePass>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Release'">

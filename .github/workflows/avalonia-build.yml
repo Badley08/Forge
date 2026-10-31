@@ -1,4 +1,4 @@
-name: Build Avalonia Android APK
+name: Build Avalonia Android APK + AAB
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build Avalonia Android
+    name: Build Avalonia Android (Signed)
     runs-on: windows-latest
 
     steps:
@@ -39,13 +39,58 @@ jobs:
           dotnet build Forge.Data/Forge.Data.csproj -c Release
           dotnet build Forge.UI/Forge.UI.csproj -c Release
 
-      - name: Build Android Package
-        run: dotnet build Forge.Android/Forge.Android.csproj -c Release -f net9.0-android -p:AndroidPackageFormat=apk
+      - name: Decode Keystore
+        shell: pwsh
+        run: |
+          $keystoreBytes = [System.Convert]::FromBase64String("${{ secrets.KEYSTORE_BASE64 }}")
+          [System.IO.File]::WriteAllBytes("${{ github.workspace }}\forge_release.jks", $keystoreBytes)
+          Write-Host "Keystore decoded successfully"
 
-      - name: Upload APK Artifact
+      - name: Build Signed APK
+        shell: pwsh
+        run: |
+          dotnet build Forge.Android/Forge.Android.csproj `
+            -c Release `
+            -f net9.0-android `
+            -p:AndroidPackageFormat=apk `
+            -p:KeystorePath="${{ github.workspace }}\forge_release.jks" `
+            -p:KeystoreAlias="${{ secrets.KEYSTORE_ALIAS }}" `
+            -p:KeystoreStorePass="${{ secrets.KEYSTORE_STORE_PASSWORD }}" `
+            -p:KeystoreKeyPass="${{ secrets.KEYSTORE_KEY_PASSWORD }}"
+
+      - name: Build Signed AAB
+        shell: pwsh
+        run: |
+          dotnet build Forge.Android/Forge.Android.csproj `
+            -c Release `
+            -f net9.0-android `
+            -p:AndroidPackageFormat=aab `
+            -p:KeystorePath="${{ github.workspace }}\forge_release.jks" `
+            -p:KeystoreAlias="${{ secrets.KEYSTORE_ALIAS }}" `
+            -p:KeystoreStorePass="${{ secrets.KEYSTORE_STORE_PASSWORD }}" `
+            -p:KeystoreKeyPass="${{ secrets.KEYSTORE_KEY_PASSWORD }}"
+
+      - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: forge-avalonia-apk
-          path: Forge.Android/bin/Release/net9.0-android/*.apk
+          name: forge-signed-apk
+          path: Forge.Android/bin/Release/net9.0-android/*-Signed.apk
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 30
+
+      - name: Upload Signed AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-signed-aab
+          path: Forge.Android/bin/Release/net9.0-android/*.aab
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Cleanup Keystore
+        if: always()
+        shell: pwsh
+        run: |
+          if (Test-Path "${{ github.workspace }}\forge_release.jks") {
+            Remove-Item "${{ github.workspace }}\forge_release.jks" -Force
+            Write-Host "Keystore removed from runner"
+          }
