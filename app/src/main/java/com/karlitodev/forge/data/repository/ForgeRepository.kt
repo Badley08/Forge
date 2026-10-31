@@ -72,10 +72,10 @@ class ForgeRepository(
     }
 
     /**
-     * Synchronizes new quotes from private GitHub repository.
+     * Synchronizes new quotes from remote encrypted source.
      * Reserved for future implementation after initial V1 creation.
      */
     suspend fun syncFromRemote() {
-        // Will download new quotes from private GitHub repository in future release.
+        // Will download new quotes from remote encrypted source in future release.
     }
 }

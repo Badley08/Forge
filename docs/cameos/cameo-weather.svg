@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="310" height="38" viewBox="0 0 310 38" fill="none">
+  <rect x="1" y="1" width="308" height="36" rx="8" fill="#1C1B17" stroke="#4D4330" stroke-width="1.2" />
+  <rect x="4" y="4" width="302" height="30" rx="6" fill="#24221C" />
+  <rect x="8" y="8" width="68" height="22" rx="4" fill="#363226" stroke="#C89B53" stroke-width="0.8" />
+  <text x="42" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="800" letter-spacing="1" fill="#E5C158" text-anchor="middle">ATMOSPHERE</text>
+  <text x="88" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.2" fill="#F5F1E8">PROCEDURAL WEATHER</text>
+  <circle cx="288" cy="19" r="4" fill="#C89B53" />
+</svg>

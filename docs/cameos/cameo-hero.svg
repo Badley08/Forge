@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="72" viewBox="0 0 480 72" fill="none">
+  <defs>
+    <linearGradient id="ironGrad" x1="0" y1="0" x2="480" y2="72" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E1D1A" />
+      <stop offset="100%" stop-color="#121212" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C89B53" />
+      <stop offset="50%" stop-color="#E5C158" />
+      <stop offset="100%" stop-color="#C89B53" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="476" height="68" rx="14" fill="url(#ironGrad)" stroke="url(#goldGrad)" stroke-width="1.8" />
+  <rect x="7" y="7" width="466" height="58" rx="10" stroke="#383530" stroke-width="1" fill="none" />
+  <!-- Inner Cameo Medallion -->
+  <circle cx="42" cy="36" r="20" fill="#252420" stroke="url(#goldGrad)" stroke-width="1.4" />
+  <path d="M42 22 L46 32 L56 36 L46 40 L42 50 L38 40 L28 36 L38 32 Z" fill="#C89B53" opacity="0.9" />
+  <!-- Text elements -->
+  <text x="80" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="4" fill="#F5F1E8">FORGE</text>
+  <text x="80" y="51" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2.5" fill="#C89B53">DAILY STOIC DISCIPLINE</text>
+  <rect x="345" y="23" width="112" height="26" rx="6" fill="#2B2720" stroke="#C89B53" stroke-width="1" />
+  <text x="401" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" fill="#E5C158" text-anchor="middle">AVALONIA UI</text>
+</svg>
